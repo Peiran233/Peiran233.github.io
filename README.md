@@ -1,3 +1,3 @@
 # Hello
 
-**Selberg's Sieve:**: (docs\Selberg.pdf)
+**Selberg's Sieve:** (docs/Selberg.pdf)

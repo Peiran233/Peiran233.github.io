@@ -9,19 +9,19 @@
             line-height: 1.6;
         }
     </style>
-    <title>PMATH 347 -- SPRING 2023</title>
+    <title>PMATH 349 -- SPRING 2024</title>
 </head>
 <body>
-    <h1>PMATH 347 -- SPRING 2023</h1>
+    <h1>PMATH 349 -- SPRING 2024</h1>
 
-    <p><strong>David McKinnon</strong></p>
+    <p><strong>Peiran Tao</strong></p>
 
     <p><strong>Office Hours in MC 5306:</strong></p>
     <ul>
         <li>None at this time</li>
     </ul>
 
-    <p><a href="mailto:david.mckinnon@example.com">Email David McKinnon</a></p>
+    <p><a href="mailto:david.mckinnon@example.com">Email Peiran Tao</a></p>
     <p><a href="http://example.com/course-policies">Course Policies</a></p>
     <p><a href="http://example.com/course-schedule">Detailed course schedule</a></p>
     <p><a href="http://example.com/notes-on-modules">Notes on Modules</a></p>

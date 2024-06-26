@@ -1,29 +1,48 @@
-# PMATH 446/646: Commutative Algebra
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #fdf6e3; /* Light yellow background */
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+    </style>
+    <title>PMATH 347 -- SPRING 2023</title>
+</head>
+<body>
+    <h1>PMATH 347 -- SPRING 2023</h1>
 
-**Winter 2017**
+    <p><strong>David McKinnon</strong></p>
 
-- **MWF 11:30--12:20 in RCH 205**
+    <p><strong>Office Hours in MC 5306:</strong></p>
+    <ul>
+        <li>None at this time</li>
+    </ul>
 
-**Office hours:** Wednesday 1:00--2:30. **Instructor:** [Jason Bell](http://example.com)
+    <p><a href="mailto:david.mckinnon@example.com">Email David McKinnon</a></p>
+    <p><a href="http://example.com/course-policies">Course Policies</a></p>
+    <p><a href="http://example.com/course-schedule">Detailed course schedule</a></p>
+    <p><a href="http://example.com/notes-on-modules">Notes on Modules</a></p>
 
-## Syllabus
-We'll cover Module theory: classification of finitely generated modules over PIDs, exact sequences and tensor products, algebras, localisation, chain conditions. Primary decomposition, integral extensions, Noether's normalisation lemma, and Hilbert's Nullstellensatz. If time permits, other topics will be covered.
+    <p>Assignments will be submitted, graded, and returned via Crowdmark. Assignments are due at 11:59pm on the day they are due.</p>
 
-## Textbook
-Eisenbud's *Commutative Algebra*
+    <hr>
 
-[These are lecture notes that have been cleaned up as much as they will this semester.](http://example.com/lecture-notes)
-
-[Notes on the Hilbert basis theorem.](http://example.com/hilbert-basis-theorem)
-
-[Notes on the general Nullstellensatz.](http://example.com/nullstellensatz)
-
-## Coursework and Grades
-Grades will be based on individual homework assignments (60%) and a final exam (40%).
-
-**Final exam:** held Wednesday, April 19, 2017 from 9:00 AM--11:30 AM in MC 4042.
-
-- **Assignment 1**, Due January 27 in class: [File](http://example.com/assignment1)
-- **Assignment 2**, Due February 27 in class: [File](http://example.com/assignment2)
-- **Assignment 3**, Due March 17 in class: [File](http://example.com/assignment3)
-- **Assignment 4**, Due April 3 in class: [File](http://example.com/assignment4)
+    <h2>Homework Assignments</h2>
+    <ul>
+        <li><a href="http://example.com/homework1">Homework 1</a></li>
+        <li><a href="http://example.com/homework2">Homework 2</a></li>
+        <li><a href="http://example.com/homework3">Homework 3</a></li>
+        <li><a href="http://example.com/homework4">Homework 4</a></li>
+        <li><a href="http://example.com/homework5">Homework 5</a></li>
+        <li><a href="http://example.com/homework6">Homework 6</a></li>
+        <li><a href="http://example.com/homework7">Homework 7</a></li>
+        <li><a href="http://example.com/homework8">Homework 8</a></li>
+        <li><a href="http://example.com/homework9">Homework 9</a></li>
+        <li><a href="http://example.com/homework10">Homework 10</a></li>
+    </ul>
+</body>
+</html>

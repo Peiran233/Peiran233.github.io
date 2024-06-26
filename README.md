@@ -1,6 +1,6 @@
-# Peiran Tao
+## Peiran Tao
 
-## Course Notes
+#### Course Notes
 
 **PMATH 348 (Field and Galois Theory)** [PMATH348](/PMATH&#32;348&#32;Notes.pdf)
 

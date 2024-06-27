@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,7 @@
             text-align: left; /* 左对齐 */
         }
     </style>
-    <title>Website</title>
+    <title>Website1</title>
 </head>
 <body>
     <div class="content">

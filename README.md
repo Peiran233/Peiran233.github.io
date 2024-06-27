@@ -1,4 +1,4 @@
-# Peiran's Website
+Website
 
 ## Notes on Sieve Method
 

@@ -2,7 +2,7 @@
 
 ## Notes on Sieve Method
 
-- [Sieve of Eratosthenes](/Eratosthenes.pdf)
+- [Sieve of Eratosthenes](/Sieve/Eratosthenes.pdf)
 
 - [Brun's Sieve](/Brun.pdf)
 

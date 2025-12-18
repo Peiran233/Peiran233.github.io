@@ -7,14 +7,12 @@
     <link rel="icon" href="img/profile3.png" type="image/png">
     
     <script>
-    MathJax = {
-      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-    };
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        /* --- 基础样式 (同步自 Research 页) --- */
+        /* --- 基础样式 --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: #222;
@@ -29,76 +27,50 @@
             padding: 0 15px;
         }
         
-        /* --- 导航栏样式 --- */
+        /* --- Header --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             padding-bottom: 15px;
-            margin-bottom: 40px; /* 稍微增加了一点间距 */
+            margin-bottom: 40px;
             border-bottom: 1px solid #eee;
         }
 
-        .site-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #000;
-            text-decoration: none;
-        }
+        .site-title { font-size: 1.5rem; font-weight: bold; color: #000; text-decoration: none; }
+        nav a { margin-left: 20px; text-decoration: none; color: #445; font-size: 1rem; }
+        nav a:hover { color: #0056b3; text-decoration: underline; }
 
-        nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #445;
-            font-size: 1rem;
-        }
-
-        nav a:hover {
-            color: #0056b3;
-            text-decoration: underline;
-        }
-
-        /* --- 博客专用样式 --- */
-        .blog-post {
-            margin-bottom: 50px;       /* 每篇博客之间的距离 */
-            border-bottom: 1px solid #f0f0f0; /* 每篇博客下面有一条淡淡的线 */
+        /* --- 博客简介列表样式 --- */
+        .blog-summary {
+            margin-bottom: 40px;
             padding-bottom: 30px;
-        }
-
-        /* 最后一篇博客去掉底下的线 */
-        .blog-post:last-child {
-            border-bottom: none;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .post-title {
             font-size: 1.5rem;
             font-weight: bold;
             color: #000;
-            margin-bottom: 5px;
-            display: block;
-            text-decoration: none; /* 如果标题想做成链接，去掉下划线 */
-        }
-
-        .post-date {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .post-content {
-            font-size: 1rem;
-            color: #333;
-        }
-
-        /* 博客里的链接颜色 */
-        .post-content a {
-            color: #0044cc;
             text-decoration: none;
         }
-        .post-content a:hover {
-            text-decoration: underline;
+        
+        .post-title:hover { text-decoration: underline; color: #c111ed; }
+
+        .post-date { color: #888; font-size: 0.9rem; margin-bottom: 10px; font-style: italic; }
+        
+        .post-excerpt { font-size: 1rem; color: #333; margin-bottom: 15px; }
+
+        /* "Read More" 按钮样式 */
+        .read-more {
+            display: inline-block;
+            color: #c111ed; /* 紫色，呼应导航栏 */
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.95rem;
         }
+        .read-more:hover { text-decoration: underline; }
+
     </style>
 </head>
 <body>
@@ -114,39 +86,25 @@
             </nav>
         </header>
 
-        <div class="blog-post">
-            <div class="post-title">Hello World: My First Blog Post</div>
+        <div class="blog-summary">
+            <a href="posts/2025-12-18-hello.html" class="post-title">Hello World: My First Blog Post</a>
             <div class="post-date">December 18, 2025</div>
-            
-            <div class="post-content">
-                <p>
-                    Welcome to my personal blog. Here I will share some thoughts on Number Theory, random math problems, and maybe some updates about my research.
-                </p>
-                <p>
-                    Since I have integrated MathJax, I can easily write equations like the Riemann Zeta function:
-                    $$ \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} $$
-                </p>
-                <p>
-                    Stay tuned for more updates!
-                </p>
+            <div class="post-excerpt">
+                Welcome to my personal blog. Here I will share some thoughts on Number Theory... 
+                (Here shows only a preview of the content).
             </div>
+            <a href="posts/2025-12-18-hello.html" class="read-more">Read more &rarr;</a>
         </div>
 
-        <div class="blog-post">
-            <div class="post-title">Some interesting thoughts on Modular Forms</div>
+        <div class="blog-summary">
+            <a href="posts/2025-11-10-modular.html" class="post-title">Some interesting thoughts on Modular Forms</a>
             <div class="post-date">November 10, 2025</div>
-            
-            <div class="post-content">
-                <p>
-                    This is an example of an older post. You can just copy-paste the "blog-post" block to add new entries.
-                </p>
-                <p>
-                    Here is an inline equation example: let $f$ be a modular form of weight $k$.
-                </p>
+            <div class="post-excerpt">
+                This post discusses the weight $k$ of modular forms and some recent observations...
             </div>
+            <a href="posts/2025-11-10-modular.html" class="read-more">Read more &rarr;</a>
         </div>
 
     </div>
-
 </body>
 </html>

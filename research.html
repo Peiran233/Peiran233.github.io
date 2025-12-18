@@ -32,6 +32,24 @@
             border-bottom: 1px solid #eee;
         }
 
+        /* --- Publications 列表样式 --- */
+        ol.publication-list {
+            padding-left: 20px; /* 整体缩进的距离 */
+            margin-left: 20px;  /* 如果觉得不够，可以增加这个数值 */
+        }
+
+        ol.publication-list li {
+            margin-bottom: 25px; /* 每篇论文之间的间距 */
+            padding-left: 10px;  /* 序号(1.)和标题文字之间的距离 */
+        }
+
+        /* 调整一下标题的样式，去掉原来的粗体可能更像列表，或者保留粗体 */
+        .publication-list .paper-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
         .site-title {
             font-size: 1.5rem;
             font-weight: bold;

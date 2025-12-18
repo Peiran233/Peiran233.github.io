@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Test Page</title>
+    
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1, h2 { border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        code { background: #f4f4f5; padding: 2px 5px; border-radius: 3px; font-family: monospace;}
+    </style>
+</head>
+<body>
+
+    <h1>LaTeX Rendering Test Page</h1>
+    <p>This page tests the MathJax functionality. If you see nicely formatted math equations below instead of raw code, it's working!</p>
+
+    <h2>1. Inline Math (行内公式)</h2>
+    <p>
+        Inline math appears within a sentence. You wrap the code in single dollar signs <code>$...$</code>.
+    </p>
+    <p>
+        比如，爱因斯坦最著名的方程是 $E=mc^2$。
+    </p>
+    <p>
+        又或者在讨论微积分时，我们知道当 $n \to \infty$ 时，这个级数收敛。我们还可以随便写点希腊字母，像这样：$\alpha, \beta, \gamma, \delta, \epsilon$。
+    </p>
+
+    <h2>2. Display Math (独立公式块)</h2>
+    <p>
+        Display math appears on its own line and is centered. You wrap the code in double dollar signs <code>$$...$$</code>.
+    </p>
+    
+    <p>这里是一个复杂的积分公式（高斯积分）：</p>
+    $$ \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi} $$
+
+    <p>这里是一个求和公式：</p>
+    $$ \sum_{i=1}^{n} i = \frac{n(n+1)}{2} $$
+
+    <p>这里是一个极限定义：</p>
+    $$ \lim_{x \to a} f(x) = L $$
+
+    <h2>3. Matrices and Arrays (矩阵和数组)</h2>
+    <p>MathJax 也可以完美处理矩阵环境。</p>
+    
+    $$ 
+    A = \begin{pmatrix} 
+        a_{11} & a_{12} & a_{13} \\ 
+        a_{21} & a_{22} & a_{23} \\ 
+        a_{31} & a_{32} & a_{33} 
+    \end{pmatrix} 
+    $$
+
+    <p>或者分段函数：</p>
+    $$
+    f(x) = \begin{cases} 
+       x^2 & \text{if } x < 0 \\
+       x   & \text{if } x \ge 0
+    \end{cases}
+    $$
+
+</body>
+</html>

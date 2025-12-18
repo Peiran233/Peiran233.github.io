@@ -63,19 +63,13 @@
         }
 
         .profile-photo {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;      /* 让外框变成圆形 */
-    
-            /* 关键修改： */
-            object-fit: contain;     /* 让整张图片缩放以完整显示（不会切掉耳朵） */
-            background-color: #fff;  /* 因为图片缩小了，周围会有空隙，这里设置背景色为白色 */
-    
-            /* 可选：如果你觉得留白太多，可以尝试微调缩放，
-               或者改回 object-fit: cover; 但那样耳朵会被切掉 */
-       
-            border: 1px solid #ddd;  /* 可选：加个细边框让圆形更明显 */
+            width: 220px;        /* 宽度固定，保持侧边栏整齐 */
+            height: auto;        /* 关键：高度设为自动，这样照片会按原比例显示，不会变形 */
+            border-radius: 10px; /* 我加了一点点圆角（10px），让长方形看起来不那么尖锐，比较现代。如果你想要完全直角，可以把这行删掉 */
             margin-bottom: 20px;
+            display: block;      /* 确保图片独占一行 */
+            margin-left: auto;   /* 这两行确保图片在侧边栏 */
+            margin-right: auto;  /* 水平居中 */
         }
 
         .contact-info {
@@ -159,7 +153,7 @@
                 
                 <div class="contact-info">
                     <p>Office - Room 1234</p>
-                    <p>yourname (at) university.edu</p>
+                    <p>peiran.tao@uwaterloo.ca</p>
                     <p>1-555-123-4567</p>
                 </div>
             </div>

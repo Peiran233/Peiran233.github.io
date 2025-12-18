@@ -15,7 +15,6 @@
             padding: 20px;
         }
 
-        /* 布局容器：宽度设为 1100px 以匹配主页 */
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -27,7 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding-bottom: 15px; /* 根据你的喜好调小了间距 */
+            padding-bottom: 15px;
             margin-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
@@ -51,17 +50,17 @@
             text-decoration: underline;
         }
 
-        /* --- 新增：表格样式 (修复显示问题) --- */
+        /* --- 表格样式 --- */
         table {
-            width: 100%;             /* 让表格占满宽度 */
-            border-collapse: collapse; /* 去掉双重边框 */
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
 
         th, td {
             text-align: left;
-            padding: 12px 5px;       /* 给文字留出呼吸空间 */
-            border-bottom: 1px solid #eee; /* 分割线 */
+            padding: 12px 5px;
+            border-bottom: 1px solid #eee;
         }
 
         th {
@@ -78,9 +77,39 @@
             text-decoration: underline;
         }
         
-        /* 鼠标悬停在某一行时变色，增加交互感 */
         tbody tr:hover {
             background-color: #f9f9f9;
+        }
+
+        /* --- 新增：Seminar Slides 区域样式 --- */
+        .seminar-section {
+            margin-top: 50px; /* 增加顶部间距，与上方表格分开 */
+            margin-bottom: 50px;
+        }
+
+        .seminar-section h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .seminar-section ul {
+            list-style-type: disc; /* 圆点列表 */
+            padding-left: 20px;
+        }
+
+        .seminar-section li {
+            margin-bottom: 10px;
+        }
+
+        .seminar-section a {
+            color: #0044cc;
+            text-decoration: none;
+        }
+
+        .seminar-section a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -94,7 +123,7 @@
                 <a href="index.html">Home</a>
                 <a href="research.html">Research</a>
                 <a href="notes.html" style="font-weight:bold; color:#000;">Notes</a>
-                </nav>
+            </nav>
         </header>
 
         <table>
@@ -160,5 +189,24 @@
             </tbody>
         </table>
 
-    </div> </body>
+        <div class="seminar-section">
+            <h2>Slides for seminar talks</h2>
+            <ul>
+                <li>
+                    <a href="Notes/bivariate_long.pdf">Algebraic Diagonals and Asymptotics of Bivariate Generating Functions (Long Version)</a>
+                    - <em>Algebraic and Enumerative Combinatorics Seminar</em>, Spring 2025
+                </li>
+                <li>
+                    <a href="Notes/bivariate_short.pdf">Algebraic Diagonals and Asymptotics of Bivariate Generating Functions (Short Version)</a>
+                    - <em>C&O URA Seminar</em>, Spring 2025
+                </li>
+                <li>
+                    <a href="Notes/selberg.pdf">Selberg's Sieve</a>
+                    - <em>Student Number Theory Seminar</em>, Spring 2024
+                </li>
+            </ul>
+        </div>
+
+    </div> 
+</body>
 </html>

@@ -13,7 +13,9 @@
 
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #222; line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 15px; }
+        
+        /* 【关键修改】这里改成了 1100px，和主页完全一致 */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 15px; }
         
         header { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 15px; margin-bottom: 40px; border-bottom: 1px solid #eee; }
         .site-title { font-size: 1.5rem; font-weight: bold; color: #000; text-decoration: none; }
@@ -22,7 +24,9 @@
 
         h1 { margin-bottom: 5px; }
         .date { color: #888; margin-bottom: 30px; font-style: italic; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .content { font-size: 1.1rem; }
+        
+        /* 稍微限制一下正文内容的宽度，防止字太长一行看不完，但容器保持1100px宽 */
+        .content { font-size: 1.1rem; max-width: 100%; } 
         .content p { margin-bottom: 20px; }
         
         /* 返回按钮样式 */
@@ -49,6 +53,9 @@
         <div class="content">
             <p>
                 Welcome to my personal blog. This is an article inside the <code>Blogs/</code> folder.
+            </p>
+            <p>
+                Now the layout width matches the homepage exactly (1100px).
             </p>
             <p>
                 Testing math: $e^{i\pi} + 1 = 0$.

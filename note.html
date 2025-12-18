@@ -39,6 +39,38 @@
             text-decoration: none;
         }
 
+		/* --- 新增表格样式 --- */
+        table {
+            width: 100%;             /* 让表格占满整个容器宽度 */
+            border-collapse: collapse; /* 去掉单元格之间的双重边框 */
+            margin-top: 20px;        /* 表格和上方导航栏保持距离 */
+        }
+
+        th, td {
+            text-align: left;        /* 文字左对齐 */
+            padding: 12px 5px;       /* 给文字周围加点空间，不那么拥挤 */
+            border-bottom: 1px solid #eee; /* 给每一行加一条灰色的分割线 */
+        }
+
+        th {
+            font-weight: bold;       /* 表头加粗 */
+            color: #000;
+        }
+
+        /* 鼠标悬停在行上时变色（可选，增加交互感） */
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* 链接颜色修正 */
+        td a {
+            color: #0044cc;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+
         nav a {
             margin-left: 20px;
             text-decoration: none;

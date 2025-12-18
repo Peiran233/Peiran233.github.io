@@ -65,9 +65,16 @@
         .profile-photo {
             width: 220px;
             height: 220px;
-            border-radius: 50%; /* Makes the square image a circle */
-            object-fit: cover;
-            background-color: #eee; /* Placeholder gray color */
+            border-radius: 50%;      /* 让外框变成圆形 */
+    
+            /* 关键修改： */
+            object-fit: contain;     /* 让整张图片缩放以完整显示（不会切掉耳朵） */
+            background-color: #fff;  /* 因为图片缩小了，周围会有空隙，这里设置背景色为白色 */
+    
+            /* 可选：如果你觉得留白太多，可以尝试微调缩放，
+               或者改回 object-fit: cover; 但那样耳朵会被切掉 */
+       
+            border: 1px solid #ddd;  /* 可选：加个细边框让圆形更明显 */
             margin-bottom: 20px;
         }
 

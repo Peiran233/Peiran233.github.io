@@ -8,14 +8,12 @@
     
     <script>
     MathJax = {
-      loader: {load: ['[tex]/ams_cd']}, // 尝试加载交换图支持
       tex: {
-        packages: {'[+]': ['ams_cd']},
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
         tags: 'ams',
-        // 【关键】这里定义了你 LaTeX 里用到的所有自定义命令
+        // 定义你的自定义命令
         macros: {
             Gal: "\\operatorname{Gal}",
             mr: "\\mathrm",
@@ -24,11 +22,11 @@
             N: "\\mathbb{N}",
             C: "\\mathbb{C}",
             R: "\\mathbb{R}",
-            defn: ["\\textbf{\\textit{#1}}", 1], // 把 \defn{} 变成粗斜体
+            defn: ["\\textbf{\\textit{#1}}", 1], 
             lb: "\\left(",
             rb: "\\right)",
-            spa: "\\vspace{2mm}",
-            l: "\\ell" // 猜测 \l 是指 \ell (l-adic)
+            spa: "\\quad", // 网页里用空格代替 vspace 会更稳定
+            l: "\\ell"
         }
       }
     };
@@ -37,7 +35,6 @@
 
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #222; line-height: 1.6; margin: 0; padding: 20px; }
-        
         .container { max-width: 1100px; margin: 0 auto; padding: 0 15px; }
         
         header { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 15px; margin-bottom: 40px; border-bottom: 1px solid #eee; }
@@ -52,31 +49,18 @@
         .content { font-size: 1.1rem; max-width: 100%; } 
         .content p { margin-bottom: 15px; }
         
-        /* --- 数学环境样式 --- */
-        /* 通用盒子样式 */
-        .math-env {
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-            border-left: 4px solid #333;
-        }
+        /* 这种 array 布局在手机上可能会太宽，加个滚动条 */
+        .math-scroll { overflow-x: auto; margin-bottom: 15px; }
 
-        /* Definition: 蓝色 */
+        /* 环境样式 */
+        .math-env { padding: 15px; margin: 20px 0; border-radius: 4px; background-color: #f9f9f9; border-left: 4px solid #333; }
         .definition { border-left-color: #0044cc; background-color: #f0f7ff; }
-        /* Theorem/Lemma: 红色/深色 */
         .theorem, .lemma { border-left-color: #d9534f; background-color: #fff5f5; }
-        /* Example: 绿色 */
         .example { border-left-color: #28a745; background-color: #f0fff4; }
-        /* Remark: 灰色 */
         .remark { border-left-color: #6c757d; background-color: #f8f9fa; }
-        /* Construction: 紫色 */
         .construction { border-left-color: #6f42c1; background-color: #f3f0ff; }
-
-        /* 标题样式 */
         .env-title { font-weight: bold; margin-right: 5px; display: inline-block; }
         
-        /* 证明环境 */
         .proof { margin: 20px 0; font-style: normal; }
         .proof::before { content: "Proof."; font-weight: bold; font-style: italic; color: #555; margin-right: 5px; }
         .proof::after { content: "∎"; float: right; color: #555; }
@@ -109,21 +93,19 @@
                 between
             </p>
 
-            \[
-            \begin{tikzcd}[row sep = 0.5mm]
-                {\{\text{intermediate fields of } L/K\}} & {\{\text{subgroups of } \mathrm{Gal}(L/K)\}} \\
-                {\text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }M} & {\mathrm{Gal}(L/M)\text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }} \\
-                {\text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }L^H} & {H\text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-                \arrow[from=1-1, to=1-2]
-                \arrow[from=2-1, to=2-2]
-                \arrow[from=3-2, to=3-1]
-            \end{tikzcd}
-            \]
+            <div class="math-scroll">
+            $$
+            \begin{array}{ccc}
+                \{\text{intermediate fields of } L/K\} & \longleftrightarrow & \{\text{subgroups of } \mathrm{Gal}(L/K)\} \\
+                M & \longleftrightarrow & \mathrm{Gal}(L/M) \\
+                \cup & & \cap \\
+                L^H & \longleftrightarrow & H
+            \end{array}
+            $$
+            </div>
 
             <p>such that</p>
-            \begin{equation}
-                [M:K] = [\Gal(L/K):\Gal(L/M)] \tag{1.1}\spa
-            \end{equation}
+            $$ [M:K] = [\Gal(L/K):\Gal(L/M)] \tag{1.1} $$
 
             <p>
                 This means to study the intermediate fields of $L/K$ it suffices to study subgroups of $\Gal(L/K)$.
@@ -133,25 +115,26 @@
             <div class="math-env example">
                 <span class="env-title">Example.</span>
                 Consider the field 
-                \begin{equation*}
+                $$
                     K = \Q\lb\sqrt d: d\in\Z\text{ is squarefree}\rb = \Q(\sqrt{-1},\sqrt{2},\sqrt{3},\sqrt{5},\cdots)
-                \end{equation*}
+                $$
                 This field $K$ is essentially the composite field of 
                 all quadratic extensions over $\Q$ (every quadratic extension over $\Q$ looks like $\Q(\sqrt{d})$ for $d$ squarefree).
                 Since each $\Q(\sqrt{d})$ is a normal extension
                 over $\Q$ we know $K$ is normal over $\Q$. Hence $K/\Q$ is a Galois extension.
                 The action of $\sigma\in\Gal(K/\Q)$ sends each $\sqrt{d}$ to $\pm\sqrt{d}$, so it turns out that
-                \begin{equation*}
+                $$
                     G := \Gal(K/\Q) \cong \prod_{i\in I} \{\pm 1\} \cong \prod_{n=1}^\infty \{\pm 1\}
-                \end{equation*}
+                $$
                 where $I = \{-1,2,3,5,\cdots\}$. There are only countably many such quadratic extensions of $\Q$
                 and they are all contained in $K$. By the formula (1.1) we ``should'' have a bijective correspondence 
-                \[
-                \begin{tikzcd}[row sep = 0.5mm]
-                {\{\text{degree 2 intermediate fields of } K/\Q\}} & {\{\text{index 2 subgroups of } \mathrm{Gal}(K/\Q)\}}
-                \arrow[from=1-1, to=1-2]
-                \end{tikzcd}
-                \]
+                
+                $$
+                \begin{array}{ccc}
+                \{\text{deg 2 intermediate fields of } K/\Q\} & \longleftrightarrow & \{\text{index 2 subgroups of } \mathrm{Gal}(K/\Q)\}
+                \end{array}
+                $$
+
                 We know the LHS is a countable set. However, it turns out that there are uncountably many subgroups of $G$
                 of index 2! This is a contradiction :( \qed
             </div>
@@ -162,29 +145,29 @@
                 we can define a topology on $\Gal(L/K)$ such that there is a new one-to-one correspondence
             </p>
             
-            \[
-            \begin{tikzcd}[row sep = 0.5mm]
-                {\{\text{intermediate fields of } L/K\}} & {\{\text{{\defn closed} subgroups of } \mathrm{Gal}(L/K)\}} \\
-                {\text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }M} & {\mathrm{Gal}(L/M)\text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }} \\
-                {\text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }L^H} & {H\text{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-                \arrow[from=1-1, to=1-2]
-                \arrow[from=2-1, to=2-2]
-                \arrow[from=3-2, to=3-1]
-            \end{tikzcd}
-            \]
+            <div class="math-scroll">
+            $$
+            \begin{array}{ccc}
+                \{\text{intermediate fields of } L/K\} & \longleftrightarrow & \{\text{closed subgroups of } \mathrm{Gal}(L/K)\} \\
+                M & \longleftrightarrow & \mathrm{Gal}(L/M) \\
+                \cup & & \cap \\
+                L^H & \longleftrightarrow & H
+            \end{array}
+            $$
+            </div>
 
             <p>
                 Now the question is: how do we put a topology on $\Gal(L/K)$??? For motivation, we have to view $\Gal(L/K)$
                 in a different way. A general fact from Galois theory says for a Galois extension $L/K$
             </p>
-            \begin{equation}
+            $$
                 L = \bigcup_{\substack{K\subseteq M\subseteq L\\ M/K \text{ finite Galois}}} M \tag{1.2}
-            \end{equation}
+            $$
             <p>
                 is the union of all <i>finite</i> Galois subextensions $M$ of $K$. What is $\Gal(L/K)$? It is just the set of all automorphisms
                 $\sigma:L\to L$ such that $\sigma\vert_K = \mr{id}_K$. How can we define such an automorphism?
                 For a $\sigma\in\Gal(L/K)$ and $L/M/K$ finite, the restriction $\sigma_M = \sigma\vert_M$ turns out
-                to be an element of $\Gal(M/K)$.\spa
+                to be an element of $\Gal(M/K)$.
             </p>
 
             <p>
@@ -192,17 +175,17 @@
                 Since $L$ is the union of finite extensions by (1.2), it suggests that we can define a $\sigma\in\Gal(L/K)$
                 ``gluing'' a collection of $\sigma_M\in \Gal(M/K)$. Let $\sigma_M\in\Gal(M/K)$ for each $L/M/K$ finite. It is tempting to define
             </p>
-            \begin{equation*}
+            $$
                 \sigma: L\to L\ \text{ by }\ \sigma(x) = \sigma_M(x)\ \text{ if $x\in M\subseteq L$ finite Galois over $K$}
-            \end{equation*}
+            $$
             <p>
                 This definition depends on the choice of $M$ that $x$ lies in. Suppose $x\in M_1$ as well, then what if 
                 $\sigma_M(x) \neq \sigma_{M_1}(x)$? This suggests we should impose conditions on this collection of $\sigma_M$'s.
                 How can we do it? It is simple, we can just require 
             </p>
-            \begin{equation*}
+            $$
                 \sigma_M(x) = \sigma_{M_1}(x)\ \text{ for all $x\in M\cap M_1$}
-            \end{equation*}
+            $$
             <p>
                 Equivalantly, it is the same as requiring $\sigma_M\vert_N = \sigma_N$ for all $N\subseteq M\subseteq L$ finite Galois extensions
                 over $K$. This motivates the following definition.
@@ -211,10 +194,10 @@
             <div class="math-env definition">
                 <span class="env-title">Definition.</span>
                 Let $L/K$ be a Galois extension. We define  
-                \begin{equation*}
+                $$
                     \mr{GAL}(L/K) := \left\{(\sigma_M)\in\prod_{\substack{K\subseteq M\subseteq L\\  M/K \text{ finite Galois}}} \Gal(M/K) : 
                     \sigma_M\vert_N = \sigma_N \text{ if $K\subseteq N\subseteq M\subseteq L$}\right\}
-                \end{equation*}
+                $$
             </div>
 
             <div class="math-env remark">
@@ -226,18 +209,18 @@
             <div class="math-env theorem">
                 <span class="env-title">Theorem.</span>
                 Let $L/K$ be a Galois extension. Then 
-                \begin{equation*}
+                $$
                     \phi: \Gal(L/K) \to \mr{GAL}(L/K)
-                \end{equation*}
+                $$
                 by $\phi(\sigma) = (\sigma\vert_M)_M$ is a group homomorphism with inverse
-                \begin{equation*}
+                $$
                     \psi: \mr{GAL}(L/K) \to  \Gal(L/K)
-                \end{equation*}
+                $$
                 by defining $\psi((\sigma_M)_M)$ to be the automorphism $\sigma:L\to L$ by $\sigma(x) = \sigma_M(x)$
                 if $x\in M$. It then follows that 
-                \begin{equation*}
+                $$
                     \Gal(L/K) \cong \mr{GAL}(L/K)\ \text{ as groups}
-                \end{equation*}
+                $$
             </div>
             
             <div class="proof">
@@ -246,20 +229,20 @@
 
             <p>
                 Now we have identified $\Gal(L/K)$ with $\mr{GAL}(L/K)$, we might abuse notation 
-                and use both interpretation when we talk about the usual Galois group $\Gal(L/K)$.\spa
+                and use both interpretation when we talk about the usual Galois group $\Gal(L/K)$.
             </p>
 
             <p>
                 Why is this definition of $\Gal(L/K)$ useful? It is because $\Gal(L/K)$ is a subgroup of the product $\prod \Gal(M/K)$. Each $\Gal(M/K)$ is a finite set with the discrete topology. Therefore $\prod \Gal(M/K)$
                 has a product topology: this is the smallest topology such that the projection
             </p>
-            \begin{equation*}
+            $$
                 \pi_M: \prod \Gal(M/K) \to \Gal(N/K)
-            \end{equation*}
+            $$
             <p>
                 is continuous for all $L/N/K$ finite Galois. Hence, as a subset of $\prod \Gal(M/K)$,
                 we can give $\Gal(L/K)$ the subspace topology! This is a very natural topology on $\Gal(L/K)$
-                using this interpretation. We call this topology the $\defn{Krull topology}$.\spa
+                using this interpretation. We call this topology the $\defn{Krull topology}$.
             </p>
 
             <p>
@@ -280,18 +263,18 @@
                 allows us to ``glue small objects to a big object''. Let $(I,\le)$ be a poset.
                 For each $i\in I$ assume there is a set $A_i$ and for all $i,j\in I$ 
                 with $i\ge j$ suppose there is a map 
-                \begin{equation*}
+                $$
                     \varphi_{i,j}: A_i \to A_j
-                \end{equation*}
+                $$
                 The inverse limit of $(A_i, \varphi_{i,j})$ is defined as 
-                \begin{equation*}
+                $$
                     \varprojlim_{i\in I} A_i := \left\{(a_i)_{i\in I} \in \prod_{i\in I} A_i : \varphi_{i,j}(a_i) = a_j\ \text{ for $i\ge j$ in $I$}\right\}
-                \end{equation*}
+                $$
                 In the case of Galois groups, we have $I = \{M: K\subseteq M\subseteq L \text{ and $M/K$ is finite Galois}\}$
                 and the map $\varphi_{M,N}(\sigma) = \sigma\vert_N$ for $N\subseteq M$. Hence we can write
-                \begin{equation*}
+                $$
                     \Gal(L/K) = \varprojlim_{\substack{K\subseteq M\subseteq L\\  M/K \text{ finite Galois}}} \Gal(M/K)
-                \end{equation*}
+                $$
                 <p style="color:orange;">Another common construction using inverse limit is the $p$-adic numbers.</p>
             </div>
 
@@ -302,22 +285,22 @@
 
             <div class="math-env lemma">
                 <span class="env-title">Lemma.</span>
-                Let $\sigma\in\Gal(L/K)$. Then $\sigma\Gal(L/M)$ is an open neighborhood of $\sigma$ for all $M/K$ finite Galois extensions.\spa
+                Let $\sigma\in\Gal(L/K)$. Then $\sigma\Gal(L/M)$ is an open neighborhood of $\sigma$ for all $M/K$ finite Galois extensions.
             </div>
             
             <div class="proof">
                 Since $\mr{id}_L\in\Gal(L/M)$ it follows that $\sigma\in\sigma\Gal(L/M)$.
                 Hence it suffices to check $\sigma\Gal(L/M)$ is an open set. This is easy. By the definition
                 of product topology we know
-                \begin{equation*}
+                $$
                     \pi_M: \Gal(L/K) \to \Gal(M/K)
-                \end{equation*}
+                $$
                 is continuous. Note that $\sigma\in\Gal(L/K)$ so $\sigma\vert_M\in\Gal(M/K)$ and $\{\sigma\vert_M\}$
                 is an open set in $\Gal(M/K)$. Hence $\pi_M^{-1}(\sigma\vert_M)$ is open in $\Gal(L/K)$.
                 We claim that 
-                \begin{equation*}
+                $$
                     \pi_M^{-1}(\sigma\vert_M) = \sigma\Gal(L/M)
-                \end{equation*}
+                $$
                 Let $\tau\in\sigma\Gal(L/M)$ so $\tau = \sigma\sigma'$ for some $\sigma'\in\Gal(L/M)$.
                 Then $\sigma'\vert_M = \mr{id}_M$ so that $\pi(\tau) = \pi(\sigma) = \sigma\vert_M$.
                 Therefore $\sigma\Gal(L/M)\subseteq \pi_M^{-1}(\sigma\vert_M)$.
@@ -330,18 +313,18 @@
             <div class="math-env remark">
                 <span class="env-title">Remark.</span>
                 This lemma tells us that for each $\sigma\in\Gal(L/K)$ we have a basis of open neighborhoods of $\sigma$
-                \begin{equation*}
-                    \{\sigma\Gal(L/M): M/K \text{ is fintie Galois}\}
-                \end{equation*}
+                $$
+                    \{\sigma\Gal(L/M): M/K \text{ is finite Galois}\}
+                $$
                 The bigger the extension $M/K$ is, the smaller the neighborhood $\sigma\Gal(L/M)$. Let $\tau\in\Gal(L/K)$
                 be another automorphism. Using the Krull topology how do we measure if $\tau$ and $\sigma$ are ``close''?
                 $\tau$ and $\sigma$ are ``close'' if and only if $\tau$ lies in a small neighborhood of $\sigma$,
                 which means $\tau\in\sigma\Gal(L/M)$ for some big finite Galois extension $M/K$.
                 And $\tau\in\sigma\Gal(L/M)$ means $\tau\vert_M = \sigma\vert_M$. This explains the Krull
                 topology:
-                \begin{equation*}
+                $$
                     \text{$\sigma$ and $\tau$ are ``close'' $\iff$ they agree on some ``big'' finite Galois extension $M/K$}
-                \end{equation*}
+                $$
             </div>
 
             <p>
@@ -351,9 +334,9 @@
             <div class="math-env definition">
                 <span class="env-title">Definition.</span>
                 Let $L/K$ be a Galois extension. A $\defn{Galois representation}$ is a continuous homomorphism 
-                \begin{equation*}
+                $$
                     \rho: \Gal(L/K) \to \mr{GL}(V) \cong \mr{GL}_n(k)
-                \end{equation*}
+                $$
                 for an $n$-dimensional vector space $V$ over a field $k$ (where $k$ has a topology).
             </div>
 
@@ -368,14 +351,14 @@
                 <span class="env-title">Example.</span>
                 Now we present a very important $1$-dimensional Galois representation, called
                 the <span style="color:magenta"> $\l$-adic cyclotomic character</span>. Consider the Galois extension 
-                \begin{equation*}
+                $$
                     \Q(\zeta_{\l^\infty}) := \Q(\zeta_{\l^n}: n\in\N)
-                \end{equation*}
+                $$
                 the composite field of all $\l$-power-cyclotomic extension and $\zeta_{\l^n} := e^{2\pi i/\l^n}$. For each $n\ge 1$ we have 
                 a group isomorphism
-                \begin{equation*}
+                $$
                     \Gal(\Q(\zeta_{\l^n})/\Q) \to (\Z/\l^n\Z)^\times\ \text{ by }\ \sigma\mapsto a\ \text{ where $\sigma(\zeta_{\l^n}) = \zeta_{\l^n}^a$}
-                \end{equation*}
+                $$
                 By taking the inverse limit, we claim that we get a group isomorphism 
                 \begin{align*}
                     \Gal(\Q(\zeta_{\l^\infty})/\Q) = \varprojlim_{n} \Gal(\Q(\zeta_{\l^n})/\Q)
@@ -386,23 +369,20 @@
                 We need this is well-defined by checking $(a_1, a_2, a_3\cdots)$ is an element of $\Z_\l^\times$.
                 Wwe need to check $a_{n+1} = a_{n}\mod{\l^n}$ for $n\ge 1$. Since $(\sigma_n)\in\Gal(\Q(\zeta_{\l^\infty})/\Q)$
                 we know $\sigma_{n+1}\vert_{\Q(\zeta_{\l^n})} = \sigma_n$. Hence 
-                \begin{equation*}
+                $$
                     \zeta_{\l^{n}}^{a_{n}} = \sigma_{n+1}(\zeta_{\l^{n}}) = \sigma_{n+1}(\zeta_{\l^{n+1}}^\l) = \sigma_{n+1}(\zeta_{\l^{n+1}})^\l = \zeta_{\l^{n+1}}^{\l a_{n+1}} = \zeta_{\l^n}^{a_{n+1}}
-                \end{equation*}
+                $$
                 Since $\zeta_{\l^n}$ is the primitive $\l^n$-th root of unity, $\zeta_{\l^{n}}^{a_{n}} = \zeta_{\l^n}^{a_{n+1}}$ implies $a_{n+1} = a_n\mod{\l^n}$.
                 It follows that $\Gal(\Q(\zeta_{\l^n})/\Q) \to \Z_\l^\times$ is well-defined. 
                 The fact that this map is a group isomorphism is easy: it comes directly from the fact that 
                 each $\Gal(\Q(\zeta_{\l^n})/\Q) \to (\Z/\l^n\Z)^\times$ is a group isomorphism.
                 This then gives a map 
                 
-                \[
-                \begin{tikzcd}
-                    {\chi_\ell: G_{\mathbb Q}} & {\mathrm{Gal}(\mathbb Q(\zeta_{\ell^\infty})/\mathbb Q)} & {\mathbb Z_\ell^\times} & {\mathbb Q_\ell^\times = \mathrm{GL}_1(\mathbb Q_\ell)}
-                    \arrow[two heads, from=1-1, to=1-2]
-                    \arrow["\sim", from=1-2, to=1-3]
-                    \arrow[hook, from=1-3, to=1-4]
-                \end{tikzcd}
-                \]
+                $$
+                \begin{array}{ccccccc}
+                    \chi_\ell: G_{\mathbb Q} & \twoheadrightarrow & \mathrm{Gal}(\mathbb Q(\zeta_{\ell^\infty})/\mathbb Q) & \overset{\sim}{\longrightarrow} & \mathbb Z_\ell^\times & \hookrightarrow & \mathbb Q_\ell^\times = \mathrm{GL}_1(\mathbb Q_\ell)
+                \end{array}
+                $$
 
                 which defines a 1-dimensional representation of $G_\Q$ over the field $\Q_\l$, 
                 the desired $\l$-adic cyclotomic character. <span style="color:orange"> Let's check this is continuous</span>.

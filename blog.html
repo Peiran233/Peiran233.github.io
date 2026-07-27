@@ -22,7 +22,7 @@
         }
 
         .container {
-            max-width: 1100px; 
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 15px;
         }
@@ -33,7 +33,7 @@
             justify-content: space-between;
             align-items: baseline;
             padding-bottom: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #eee;
         }
 
@@ -70,6 +70,24 @@
             font-size: 0.95rem;
         }
         .read-more:hover { text-decoration: underline; }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                margin-top: 15px;
+            }
+
+            nav a {
+                margin-left: 0;
+                margin-right: 15px;
+                display: inline-block;
+            }
+        }
 
     </style>
 </head>

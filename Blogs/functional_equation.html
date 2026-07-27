@@ -24,14 +24,48 @@
 * { box-sizing: border-box; }
 html { background: var(--paper); color: var(--ink); scroll-behavior: smooth; }
 body {
+  margin: 0;
+  padding: 20px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.site-container {
+  max-width: 900px;
   margin: 0 auto;
-  max-width: 61rem;
-  padding: 3.2rem 3.5rem 5rem;
+  padding: 0 15px;
+}
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.site-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+.site-nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #445;
+  font-size: 1rem;
+}
+.site-nav a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+.article {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, "TeX Gyre Pagella", serif;
   font-size: 18px;
   line-height: 1.52;
   text-rendering: optimizeLegibility;
   font-kerning: normal;
+  padding-bottom: 5rem;
 }
 p { margin: 0.72rem 0; }
 a { color: var(--link); text-decoration: none; }
@@ -72,13 +106,20 @@ h3 { font-size: 1.2rem; margin: 1.75rem 0 0.65rem; }
 .qed { float: right; }
 blockquote { border-left: 3px solid #ddd; margin-left: 0; padding-left: 1rem; color: #444; }
 @media (max-width: 700px) {
-  body { padding: 1.4rem 1.05rem 3rem; font-size: 16px; }
+  body { padding: 20px; }
+  .site-header { flex-direction: column; align-items: flex-start; }
+  .site-nav { margin-top: 15px; }
+  .site-nav a { margin-left: 0; margin-right: 15px; display: inline-block; }
+  .article { font-size: 16px; }
   h1 { font-size: 1.7rem; }
   h2 { font-size: 1.3rem; }
   mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
 }
 @media print {
-  body { max-width: none; padding: 0; font-size: 11pt; }
+  body { padding: 0; }
+  .site-header { display: none; }
+  .site-container { max-width: none; padding: 0; }
+  .article { font-size: 11pt; padding: 0; }
   a { color: inherit; }
   .thm, .example, .remark { break-inside: avoid; }
 }
@@ -102,6 +143,17 @@ window.MathJax = {
 };
 </script><script async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><meta content="Notes on theta functions and the functional equation of the Riemann zeta function." name="description"/></head>
 <body>
+
+<div class="site-container">
+<header class="site-header">
+  <a href="../index.html" class="site-title">Peiran Tao</a>
+  <nav class="site-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html" style="font-weight:bold; color:#c111ed;">Blog</a>
+    <a href="../notes.html">Notes</a>
+  </nav>
+</header>
+<main class="article">
 
 <h1 id="functional-equations"><span class="section-number">2</span>Functional Equations</h1>
 <p>We go tangent a bit and look at the problem of sum of two squares. We
@@ -166,11 +218,11 @@ express 25 a sum of two squares. Hence the number <span class="math inline">\(r(
 <span class="math inline">\(25\)</span> is a sum of two squares, by a
 factor of 4. This is actually true in general for all <span class="math inline">\(n\)</span> (the reason is <span class="math inline">\(\Z[i]\)</span> has four units). Hence <span class="math display">\[s(n) = 4r(n) = 4\sum_{d\mid n} \chi_4(d)\]</span>
 We know that <span class="math display">\[\chi_4(n) =
-    \begin{cases*}
+    \begin{cases}
         1 &amp;\text{ if $n = 1\mod 4$}\\
         -1 &amp;\text{ if $n = 3\mod 4$}\\
         0 &amp;\text{ otherwise}
-    \end{cases*}\]</span> This completes the proof of Fermat’s
+    \end{cases}\]</span> This completes the proof of Fermat’s
 theorem.</p>
 <h2 id="theta-function-and-the-possion-summation-formula"><span class="section-number">2.2</span>Theta function
 and the Possion summation formula</h2>
@@ -231,7 +283,7 @@ following substitution <span class="math display">\[\omega(x) :=
     &amp;= \int_{-\infty}^\infty e^{-\pi(y\sqrt{x})^2} e^{-2\pi iny}\
 \mr{d}y\\
     &amp;= x^{-1/2}\int_{-\infty}^\infty e^{-\pi u^2} e^{-2\pi
-i(n/\sqrt{x}) u} \tag{let $u = y\sqrt{x}$}\\
+i(n/\sqrt{x}) u} \qquad \text{(let }u=y\sqrt{x}\text{)}\\
     &amp;= x^{-1/2}\ \hat v\lb\frac{n}{\sqrt{x}}\rb
 \end{aligned}\]</span> where <span class="math inline">\(v(x) = e^{-\pi
 x^2}\)</span> is from <a href="#ex:2.4">Example 2.4</a> above. Hence
@@ -277,9 +329,9 @@ good intuition and encourages us to try to fix it and get a correct
 proof. First, let’s compute the Mellin transform of <span class="math inline">\(\omega(x)\)</span> <span class="math display">\[\begin{aligned}
     (\mc M\omega)(y) &amp;:= \int_0^\infty \omega(x)x^{y-1}\ \mr{d}x\\
     &amp;= \int_0^\infty \omega(1/x) x^{1-y} \frac{\mr{d}x}{x^2}
-\tag{$x\to 1/x$}\\
+\qquad \text{(substitute }x\mapsto 1/x\text{)}\\
     &amp;= \int_0^\infty x^{1/2}\omega(x) x^{-1-y}\ \mr{d}x
-\tag{functional equation}\\
+\qquad \text{(functional equation)}\\
     &amp;= \int_0^\infty \omega(x) x^{(1/2-y)-1}\\
     &amp;= (\mc M\omega)(1/2-y)
 \end{aligned}\]</span> This gives a functional equation for the Mellin
@@ -293,11 +345,11 @@ let’s ignore this for now lol.</p>
     (\mc M\omega)(y) &amp;= \int_0^\infty \sum_{n\in\Z} e^{-\pi n^2 x}
 x^{y-1}\ \mr{d}x\\
     &amp;= \sum_{n\in\Z} \int_0^\infty e^{-\pi n^2 x} x^{y-1}\ \mr{d}x
-\tag{by absolute convergence}\\
+\qquad \text{(by absolute convergence)}\\
     &amp;= \sum_{n\in\Z} \pi^{-y} n^{-2y} \int_0^\infty e^{-u} u^{y-1}\
-\mr{d}u \tag{$u = \pi n^2 x$}\\
+\mr{d}u \qquad \text{(let }u=\pi n^2x\text{)}\\
     &amp;= \sum_{n\in\Z} \pi^{-y} n^{-2y} \Gamma(y)\\
-    &amp;= \pi^{-y} \Gamma(y) \sum_{n\in\Z} n^{-2y} \tag{$*$}
+    &amp;= \pi^{-y} \Gamma(y) \sum_{n\in\Z} n^{-2y} \qquad (*)
 \end{aligned}\]</span> Note the summation here is kinda like the zeta
 function, if we do a change of variable <span class="math inline">\(s =
 2y\)</span>, then we have <span class="math display">\[(\mc
@@ -342,8 +394,7 @@ can consider <span class="math display">\[\begin{aligned}
 \tfrac{1}{2}(x^{-1/2}-1))x^{s/2-1}\ \mr{d}x}_{(\dagger)} + \int_1^\infty
 \Omega(x)x^{s/2-1}\ \mr{d}x\\
     &amp;= \int_0^1 \Omega(x)x^{(1-s)/2-1}\ \mr{d}x + \frac{1}{s-1} -
-\frac{1}{s} + \int_1^\infty \Omega(x)x^{s/2-1}\ \mr{d}x \tag{$x\to 1/x$
-in $(\dagger)$}
+\frac{1}{s} + \int_1^\infty \Omega(x)x^{s/2-1}\ \mr{d}x \qquad \text{(substitute }x\mapsto 1/x\text{ in }(\dagger)\text{)}
 \end{aligned}\]</span> Now the magic occurs! We see that in the last
 expression, if we replace <span class="math inline">\(s\)</span> with
 <span class="math inline">\(1-s\)</span>, we actually get the same
@@ -368,5 +419,7 @@ information <span class="math inline">\(\Re(s) &gt; 1/2\)</span>. In
 particular we can study <span class="math inline">\(\Re(s) &lt;
 0\)</span> using <span class="math inline">\(\Re(s) &gt; 1\)</span>,
 which we know quite well!</p>
+</main>
+</div>
 </body>
 </html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta content="pandoc" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>Functional Equations</title>
+
+
+
+<style>
+:root {
+  --ink: #171717;
+  --paper: #ffffff;
+  --link: #0000ee;
+  --thm: #4169e1;
+  --thm-bg: #f7f9ff;
+  --example: #228b22;
+  --example-bg: #f7fcf7;
+  --remark: #228b22;
+  --remark-bg: #f7fcf7;
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); color: var(--ink); scroll-behavior: smooth; }
+body {
+  margin: 0 auto;
+  max-width: 61rem;
+  padding: 3.2rem 3.5rem 5rem;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, "TeX Gyre Pagella", serif;
+  font-size: 18px;
+  line-height: 1.52;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+p { margin: 0.72rem 0; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2;
+  color: #111;
+}
+h1 { font-size: 2rem; margin: 0 0 1.6rem; }
+h2 { font-size: 1.48rem; margin: 2.25rem 0 0.85rem; }
+h3 { font-size: 1.2rem; margin: 1.75rem 0 0.65rem; }
+.section-number { margin-right: 0.65em; }
+.math.display {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 1rem 0;
+  padding: 0.15rem 0;
+}
+.thm, .example, .remark {
+  margin: 1rem 0;
+  padding: 0.65rem 0.9rem 0.8rem;
+  border: 1px solid;
+  break-inside: avoid;
+}
+.thm { border-color: var(--thm); background: var(--thm-bg); }
+.example, .remark { border-color: var(--example); background: var(--example-bg); }
+.env-head {
+  display: inline;
+  font-weight: 700;
+  margin-right: 0.38em;
+}
+.thm > .env-head { color: var(--thm); }
+.example > .env-head, .remark > .env-head { color: var(--example); }
+.thm > p:first-of-type, .example > p:first-of-type, .remark > p:first-of-type { display: inline; }
+.proof-label { font-style: italic; }
+.qed { float: right; }
+blockquote { border-left: 3px solid #ddd; margin-left: 0; padding-left: 1rem; color: #444; }
+@media (max-width: 700px) {
+  body { padding: 1.4rem 1.05rem 3rem; font-size: 16px; }
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.3rem; }
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+}
+@media print {
+  body { max-width: none; padding: 0; font-size: 11pt; }
+  a { color: inherit; }
+  .thm, .example, .remark { break-inside: avoid; }
+}
+</style><script>
+window.MathJax = {
+  tex: {
+    tags: 'ams',
+    packages: {'[+]': ['ams']},
+    macros: {
+      mr: ['\\mathrm{#1}', 1], mc: ['\\mathcal{#1}', 1], mb: ['\\mathbb{#1}', 1],
+      mf: ['\\mathfrak{#1}', 1], ms: ['\\mathscr{#1}', 1],
+      F: '\\mathbb{F}', E: '\\mathbb{E}', R: '\\mathbb{R}', C: '\\mathbb{C}',
+      N: '\\mathbb{N}', Q: '\\mathbb{Q}', Z: '\\mathbb{Z}', K: '\\mathbb{K}', M: '\\mathbb{M}',
+      O: '\\mathcal{O}', H: '\\mathcal{H}',
+      lb: '\\left(', rb: '\\right)',
+      dif: '\\mathop{}\\!\\mathrm{d}',
+      pa: '\\partial', de: '\\delta', a: '\\alpha', b: '\\beta', e: '\\epsilon'
+    }
+  },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script><script async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><meta content="Notes on theta functions and the functional equation of the Riemann zeta function." name="description"/></head>
+<body>
+
+<h1 id="functional-equations"><span class="section-number">2</span>Functional Equations</h1>
+<p>We go tangent a bit and look at the problem of sum of two squares. We
+will introduce the Jacobi theta function in this section, which
+motivates Riemann to derive the functional equation of the zeta function
+<span class="math inline">\(\zeta(s)\)</span>.</p>
+<h2 id="sum-of-two-squares"><span class="section-number">2.1</span>Sum of two squares</h2>
+<p>People were interested in studying which positive integers can be
+written as a sum of squares. In the 1600s, Pierre de Fermat proved the
+following result on the sum of two squares</p>
+<div class="thm"><span class="env-head">Theorem 2.1 (Fermat's theorem on sums of two squares).</span>
+<p>Let <span class="math inline">\(p\)</span> be an odd prime. Then
+<span class="math inline">\(p\)</span> can be expressed as a sum of two
+squares if and only if <span class="math inline">\(p = 1\mod 4\)</span>.
+That is, there exist <span class="math inline">\(x,y\in\Z\)</span> such
+that <span class="math inline">\(p=x^2+y^2\)</span> if and only if <span class="math inline">\(p=1\mod 4\)</span>. More generally, let <span class="math display">\[s(n) := \{(a,b)\in\Z^2: a^2 + b^2 = n\}\]</span>
+to be the number of ways <span class="math inline">\(n\)</span> is a sum
+of two squares. Then <span class="math inline">\(s(n) = d_1(n) -
+d_3(n)\)</span>, where <span class="math inline">\(d_i(n) =\)</span>
+number of <span class="math inline">\(d\mid n\)</span> such that <span class="math inline">\(d=i\mod 4\)</span> for <span class="math inline">\(i\in\{1,3\}\)</span>.</p>
+</div>
+<div class="example"><span class="env-head">Example 2.2.</span>
+<p>Take <span class="math inline">\(n = 385 = 5 \cdot 7\cdot
+11\)</span>. Note <span class="math inline">\(5 = 1\mod 4\)</span> and
+<span class="math inline">\(7 = 11 = 3\mod 4\)</span>, so it has more
+prime divisors that are 3 mod 4. By the theorem above, it cannot be
+expressed a sum of two squares.</p>
+</div>
+<p>There are several proofs to this problem, and mainly fall into three
+categories.</p>
+<p><span><em>1. Elementary method.</em></span> This is the proof due to
+Fermat. For more details on this, see [Kou]</p>
+<p><span><em>2. Algebraic method.</em></span> We briefly outline the
+proof for those who know some algebraic number theory. Readers who are
+not familiar with this can skip this part without problems. The key is
+to realize <span class="math inline">\(x^2+y^2\)</span> as the norm of
+the ideal <span class="math inline">\((x+iy)\)</span> in the algebraic
+number field <span class="math inline">\(\Q(i)\)</span>. In general for
+a number field <span class="math inline">\(K/\Q\)</span> with ring of
+integer <span class="math inline">\(\O_K\)</span> and a nonzero ideal
+<span class="math inline">\(I\subseteq\O_K\)</span>, it is known that
+<span class="math inline">\(\O_K/I\)</span> is a finite ring. We thus
+define the the norm of <span class="math inline">\(I\)</span> to be
+<span class="math inline">\(N(I) := |\O_K/I|\)</span>. In our case <span class="math inline">\(K = \Q(i)\)</span>, it turns out that <span class="math inline">\(\O_K = \Z[i]\)</span> and <span class="math inline">\(\Z[i]\)</span> is a PID. In this case every ideal
+<span class="math inline">\(I\)</span> is generated by <span class="math inline">\(a+ib\)</span> for some <span class="math inline">\(a,b\in\Z\)</span>, and <span class="math display">\[N((a+ib)) = a^2 + b^2\]</span> Hence, this
+translates our original question to “which primes <span class="math inline">\(p\)</span> can be the norm of an ideal in <span class="math inline">\(\Z[i]\)</span>?”. We introduce the Dedekind zeta
+function of <span class="math inline">\(\Q(i)\)</span> as <span class="math display">\[\zeta_{\Q(i)} := \sum_{0\neq I\subseteq\O_K}
+\frac{1}{N(I)^s} = \sum_{n\ge 1} \frac{r(n)}{n^s}\]</span> where <span class="math inline">\(r(n) := \#\)</span> of ideals <span class="math inline">\(I\subseteq\O_K\)</span> with <span class="math inline">\(N(I) = n\)</span>. Now, it turns out, using the
+Euler product of <span class="math inline">\(\zeta_{\Q(i)}(s)\)</span>,
+that <span class="math display">\[\zeta_{\Q(i)}(s) =
+\zeta(s)L(s,\chi_4)\]</span> where <span class="math inline">\(\chi_4\)</span> is the unique non-trivial
+character mod 4. Therefore <span class="math display">\[r(n) =
+\sum_{d\mid n} \chi(d)\]</span> by the multiplication rule of Dirichlet
+series. We are not quite done yet. We have figured out an explicit
+formula for <span class="math inline">\(r(n)\)</span>, but this is not
+quite the number of ways <span class="math inline">\(n\)</span> is a sum
+of two squares. For example, we note that <span class="math inline">\(25
+= 3^2 + 4^2\)</span>. This actually gives four ways to write <span class="math inline">\(25\)</span> as a sum of two squares <span class="math display">\[25 = 3^2 + 4^2 = (-3)^2 + 4^2 = 3^2 + (-4)^2 =
+(-3)^2 + (-4)^2\]</span> However, as ideals we have <span class="math display">\[(3+4i) = (-3+4i) = (4+3i) = (-4+3i)\]</span> This
+ideal is only counted once by <span class="math inline">\(r(25)\)</span>, but it represents four ways to
+express 25 a sum of two squares. Hence the number <span class="math inline">\(r(25)\)</span> undercounts the number of ways
+<span class="math inline">\(25\)</span> is a sum of two squares, by a
+factor of 4. This is actually true in general for all <span class="math inline">\(n\)</span> (the reason is <span class="math inline">\(\Z[i]\)</span> has four units). Hence <span class="math display">\[s(n) = 4r(n) = 4\sum_{d\mid n} \chi_4(d)\]</span>
+We know that <span class="math display">\[\chi_4(n) =
+    \begin{cases*}
+        1 &amp;\text{ if $n = 1\mod 4$}\\
+        -1 &amp;\text{ if $n = 3\mod 4$}\\
+        0 &amp;\text{ otherwise}
+    \end{cases*}\]</span> This completes the proof of Fermat’s
+theorem.</p>
+<h2 id="theta-function-and-the-possion-summation-formula"><span class="section-number">2.2</span>Theta function
+and the Possion summation formula</h2>
+<p><span><em>3. Analytic method.</em></span> This is the method that we
+will pay the most attention to. Again, let’s using the method of a
+generating function. It is natural to consider the function <span class="math display">\[f(q) = \sum_{n\in\Z} q^{n^2}\]</span> Then by the
+rule of multiplication of power series, we get <span class="math display">\[\begin{aligned}
+    f(q)^2 &amp;= 1 + \sum_{n\ge 1} s(n)q^n
+\end{aligned}\]</span> This works nicely as formal power series, but we
+cannot go further from here. The genius thought of Jacobi to consider a
+change of variable <span class="math inline">\(q = e^{\pi
+i\tau}\)</span>, where <span class="math inline">\(\Im(\tau) &gt;
+0\)</span>. This yields <span class="math display">\[\vartheta(\tau) :=
+f(e^{\pi i\tau}) = \sum_{n\in\Z} e^{\pi i n^2\tau}\]</span> called the
+<strong>Jacobi theta function</strong>. Now we need a bit of result from
+Fourier analysis. For a “nice” function <span class="math inline">\(f:\R\to\R\)</span> that we can do fourier analysis
+(the Schwarz class function), define <span class="math display">\[\hat
+f(t) := \int_{-\infty}^\infty f(x)e^{-2\pi itx}\ \mr{d}x\]</span> to be
+the <strong>fourier transform</strong> of <span class="math inline">\(f\)</span>. An amazing theorem from Fourier
+analysis states</p>
+<div class="thm"><span class="env-head">Theorem 2.3 (Possion summation formula).</span>
+<p>Let <span class="math inline">\(f\in L^1(\R)\)</span> and the suppose
+that <span class="math display">\[F(v) := \sum_{n\in\Z} f(n+v)\ \text{
+converges absolutely and uniformly as a function.} \tag{1}\]</span> and
+that <span class="math display">\[\sum_{m\in\Z} |\hat f(m)| &lt; \infty
+\tag{2}\]</span> Then <span class="math display">\[F(v) = \sum_{n\in\Z}
+f(n+v) = \sum_{n\in\Z} \hat f(n) e^{2\pi inv} \tag{3}\]</span> In
+particular if <span class="math inline">\(v = 0\)</span> we have <span class="math display">\[\sum_{n\in\Z} f(n) = \sum_{n\in\Z} \hat f(n)
+\tag{4}\]</span></p>
+</div>
+<p><span class="proof-label"><em>Proof.</em></span> This is a very natural theorem if you
+think about it. We know a lot about the fourier analysis of periodic
+functions. So if we have a function <span class="math inline">\(f\in
+L^1(\R)\)</span> that is not necessarily periodic, we can “periodify” it
+in the most natural way by equation (1). Now <span class="math inline">\(F(v)\)</span> is 1-periodic, so we can then use
+the fourier analysis of periodic functions to study <span class="math inline">\(F(v)\)</span>. Condition (2) ensures that the
+fourier series of <span class="math inline">\(F(v)\)</span> converges
+back to the <span class="math inline">\(F(v)\)</span>, that is <span class="math display">\[F(v) = \sum_{n\in\Z} \hat F(n) e^{2\pi
+inv}\]</span> Now one can check that <span class="math inline">\(\hat
+F(n) = \hat f(n)\)</span>, so we have proven (3).0◻</p>
+<p>In most cases part (4) of the Possion summation formula is the one we
+will be using.</p>
+<div class="example" id="ex:2.4"><span class="env-head">Example 2.4.</span>
+<p>For the function <span class="math inline">\(v(x) = e^{-\pi
+x^2}\)</span>, it is a classical result that <span class="math inline">\(\hat v(t) = e^{-\pi t^2}\)</span>. So this is a
+function whose fourier transform it itself!</p>
+</div>
+
+<p>Now back to the theta function, we have <span class="math display">\[\vartheta(\tau) = \sum_{n\in\Z} e^{\pi i
+n^2\tau}\]</span> and the R.H.S reminds us of the Possion summation
+formula and the above <a href="#ex:2.4">Example 2.4</a>! So why don’t we
+apply the Possion summation formula to it? We first make the funtion
+<span class="math inline">\(\vartheta(\tau)\)</span> real-valued by the
+following substitution <span class="math display">\[\omega(x) :=
+\vartheta(ix) = \sum_{n\in\Z} e^{-\pi n^2 x}\]</span> where <span class="math inline">\(x &gt; 0\)</span>. For such a fixed <span class="math inline">\(x &gt; 0\)</span>, we set <span class="math inline">\(f(y) = e^{-\pi y^2 x}\)</span>, we have <span class="math display">\[\begin{aligned}
+    \hat f(n) &amp;= \int_{-\infty}^\infty e^{-\pi y^2 x} e^{-2\pi iny}\
+\mr{d}y\\
+    &amp;= \int_{-\infty}^\infty e^{-\pi(y\sqrt{x})^2} e^{-2\pi iny}\
+\mr{d}y\\
+    &amp;= x^{-1/2}\int_{-\infty}^\infty e^{-\pi u^2} e^{-2\pi
+i(n/\sqrt{x}) u} \tag{let $u = y\sqrt{x}$}\\
+    &amp;= x^{-1/2}\ \hat v\lb\frac{n}{\sqrt{x}}\rb
+\end{aligned}\]</span> where <span class="math inline">\(v(x) = e^{-\pi
+x^2}\)</span> is from <a href="#ex:2.4">Example 2.4</a> above. Hence
+<span class="math inline">\(\hat v(n/\sqrt{x}) = v(n/\sqrt{x}) = e^{-\pi
+n^2/x}\)</span>. Therefore by the Possion summation formula we
+obtain:</p>
+<div class="thm" id="funomega"><span class="env-head">Theorem 2.5 (Functional equation of <span class="math inline">\(\omega(x)\)</span>).</span>
+<p>For <span class="math inline">\(x &gt; 0\)</span> we have <span class="math display">\[\omega(x) = \sum_{n\in\Z} e^{-\pi n^2 x} =
+\sum_{n\in\Z} x^{-1/2}  e^{-\pi n^2/x} =
+x^{-1/2}\omega\lb\frac{1}{x}\rb\]</span></p>
+</div>
+
+<p>We now use this result to obtain a functional equation of <span class="math inline">\(\vartheta(\tau)\)</span>. First we have <span class="math display">\[x^{1/2}\vartheta(ix) = \vartheta(i/x)\]</span>
+for <span class="math inline">\(x &gt; 0\)</span>. This is a functional
+relation for <span class="math inline">\(\theta(\tau)\)</span> on the
+upper imaginary axis, that is <span class="math display">\[(-i\tau)^{1/2}\vartheta(\tau) =
+\vartheta\lb\frac{-1}{\tau}\rb\]</span> Both sides of this equality
+define analytic functions on <span class="math inline">\(\mb H =
+\{z\in\C: \Im(z) &gt; 0\}\)</span>, and they agree on <span class="math inline">\(\{ix: x &gt; 0\}\subseteq\mb H\)</span>, a subset
+of <span class="math inline">\(\mb H\)</span> that has limit points.
+Hence the identity theorem from complex analysis shows that</p>
+<div class="thm"><span class="env-head">Theorem 2.6 (Functional equation of <span class="math inline">\(\vartheta(\tau)\)</span>).</span>
+<p>For all <span class="math inline">\(\tau\in\mb H\)</span> we have
+<span class="math display">\[(-i\tau)^{1/2}\vartheta(\tau) =
+\vartheta\lb\frac{-1}{\tau}\rb\]</span></p>
+</div>
+<p>Recall that we also know <span class="math inline">\(\vartheta(\tau+1) = \vartheta(\tau)\)</span>. Now
+we need a big black box here. By adapting the theory of modular forms,
+one can show that <span class="math inline">\(\vartheta(2\tau)^2\)</span> is a weight 1 modular
+form of level <span class="math inline">\(\Gamma_0(4)\)</span> and
+character <span class="math inline">\(\chi_4\)</span>, the unique
+nontrivial character mod 4 that we have seen above. The space of such
+modular forms have dimension 1 and is generated by some Eisenstein
+series. A bit of work shows that <span class="math display">\[\theta(2\tau)^2 = 1 + \sum_{n\ge 1} \lb
+4\sum_{d\mid n} \chi_4(d)\rb e^{2\pi i n^2}\]</span> Matching the
+coefficients gives us Fermat’s theorem again!</p>
+<h2 id="functional-equation-of-zetas"><span class="section-number">2.3</span>Functional Equation of <span class="math inline">\(\zeta(s)\)</span></h2>
+<p>Hopefully the above disucssion on <span class="math inline">\(\omega(x)\)</span> looks natural enough. Now we
+will use the <a href="#funomega">functional equation of <span class="math inline">\(\omega(x)\)</span></a> to derive a functional
+equation of <span class="math inline">\(\zeta(s)\)</span>. We first
+outline a wrong proof that looks right. This nevertheless gives us a
+good intuition and encourages us to try to fix it and get a correct
+proof. First, let’s compute the Mellin transform of <span class="math inline">\(\omega(x)\)</span> <span class="math display">\[\begin{aligned}
+    (\mc M\omega)(y) &amp;:= \int_0^\infty \omega(x)x^{y-1}\ \mr{d}x\\
+    &amp;= \int_0^\infty \omega(1/x) x^{1-y} \frac{\mr{d}x}{x^2}
+\tag{$x\to 1/x$}\\
+    &amp;= \int_0^\infty x^{1/2}\omega(x) x^{-1-y}\ \mr{d}x
+\tag{functional equation}\\
+    &amp;= \int_0^\infty \omega(x) x^{(1/2-y)-1}\\
+    &amp;= (\mc M\omega)(1/2-y)
+\end{aligned}\]</span> This gives a functional equation for the Mellin
+transform <span class="math inline">\(\mc M\omega\)</span>.</p>
+<div class="remark"><span class="env-head">Remark 2.7.</span>
+<p>The problem here is that the integral in the Mellin transform of
+<span class="math inline">\(\omega\)</span> does even converge! But
+let’s ignore this for now lol.</p>
+</div>
+<p>Let’s compute the Mellin transform in a different way <span class="math display">\[\begin{aligned}
+    (\mc M\omega)(y) &amp;= \int_0^\infty \sum_{n\in\Z} e^{-\pi n^2 x}
+x^{y-1}\ \mr{d}x\\
+    &amp;= \sum_{n\in\Z} \int_0^\infty e^{-\pi n^2 x} x^{y-1}\ \mr{d}x
+\tag{by absolute convergence}\\
+    &amp;= \sum_{n\in\Z} \pi^{-y} n^{-2y} \int_0^\infty e^{-u} u^{y-1}\
+\mr{d}u \tag{$u = \pi n^2 x$}\\
+    &amp;= \sum_{n\in\Z} \pi^{-y} n^{-2y} \Gamma(y)\\
+    &amp;= \pi^{-y} \Gamma(y) \sum_{n\in\Z} n^{-2y} \tag{$*$}
+\end{aligned}\]</span> Note the summation here is kinda like the zeta
+function, if we do a change of variable <span class="math inline">\(s =
+2y\)</span>, then we have <span class="math display">\[(\mc
+M\omega)\lb\frac{s}{2}\rb =
+\pi^{-s/2}\Gamma\lb\frac{s}{2}\rb\sum_{n\in\Z} n^{-s}\]</span>
+Functional equation of <span class="math inline">\(\mc M\omega\)</span>
+gives <span class="math inline">\(\mc M\omega(s/2) = \mc
+M\omega((1-s)/2)\)</span>, so we obtain <span class="math display">\[\pi^{-(1-s)/{2}}\Gamma\lb\frac{1-s}{2}\rb\sum_{n\in\Z}
+n^{-(1-s)} = \pi^{-s/2}\Gamma\lb\frac{s}{2} + 2\rb\sum_{n\in\Z}
+n^{-s}\]</span> This gives a functional equation <span class="math display">\[\pi^{-(1-s)/{2}}\Gamma\lb\frac{1-s}{2}\rb\tilde\zeta(1-s)
+= \pi^{-s/2}\Gamma\lb\frac{s}{2}\rb\tilde\zeta(s)\]</span> for <span class="math inline">\(\Re(s) &gt; 1\)</span>, related to the fake zeta
+function <span class="math inline">\(\tilde\zeta(s) := \sum_{n\in\Z}
+n^{-s}\)</span> that kinda looks like <span class="math inline">\(\zeta(s)\)</span>, but it is hard to relate it to
+the actual <span class="math inline">\(\zeta(s)\)</span> in an obvious
+way. <span> Spoiler: This is actually exactly the same as the actual
+functional equation of <span class="math inline">\(\zeta(s\)</span>),
+just <span class="math inline">\(\tilde\zeta(s)\)</span> is replaced by
+<span class="math inline">\(\tilde\zeta(s)\)</span>.</span></p>
+<p>Now of course the above derivation is garabage, because even the
+first step is wrong. We can make <span class="math inline">\(\zeta(s)\)</span> appear in <span class="math inline">\((*)\)</span> by replacing the sum over <span class="math inline">\(\Z\)</span> to sum over <span class="math inline">\(\N\)</span> by using the function <span class="math display">\[\Omega(x) := \frac{\omega(x)-1}{2} = \sum_{n\ge
+1} e^{-\pi n^2 x}\]</span> The Mellin transform of <span class="math inline">\(\Omega(x)\)</span> now exists! The above
+derivation also tells us that we should compute its Mellin transform at
+<span class="math inline">\(s/2\)</span>, for <span class="math inline">\(\Re(s) &gt; 1\)</span>.</p>
+<p>Hopefully the explanation above motivates what we are trying to do,
+so let’s begin the formal and rigorous treatment of the functional
+equation. By similar computations from above <span class="math display">\[\begin{aligned}
+    (\mc M\Omega)(s/2) = \int_0^\infty \Omega(x)x^{s/2-1}\ \mr{d}x =
+\int_0^\infty \sum_{n\ge 1} e^{-\pi n^2 x} x^{s/2-1}\ \mr{d}x
+    = \pi^{-s/2}\Gamma(s/2)\zeta(s)
+\end{aligned}\]</span> We now define <span class="math inline">\(\Lambda(s) :=
+\pi^{-s/2}\Gamma(s/2)\zeta(s)\)</span> for <span class="math inline">\(\Re(s) &gt; 1\)</span>. Since <span class="math inline">\(2\Omega(x) + 1 = \omega(x)\)</span>, we know <span class="math inline">\(\Omega(x)\)</span> has a functional equation
+(coming from <span class="math inline">\(\omega(x)\)</span>) that <span class="math display">\[\Omega(x) = x^{-1/2}\Omega(1/x) +
+\frac{1}{2}(x^{-1/2}-1)\]</span> for <span class="math inline">\(x &gt;
+0\)</span>. Just like <span class="math inline">\(\omega(x)\)</span>,
+this translates the information about <span class="math inline">\(\Omega(x)\)</span> for <span class="math inline">\(x\in(0,1)\)</span> to <span class="math inline">\(\Omega(x)\)</span> for <span class="math inline">\(x\in(1,\infty)\)</span> and vice verse. Hence we
+can consider <span class="math display">\[\begin{aligned}
+    \Lambda(s) &amp;= \pi^{-s/2}\Gamma(s/2)\zeta(s) = \int_0^\infty
+\Omega(x)x^{s/2-1}\ \mr{d}x\\
+    &amp;= \int_0^1 \Omega(x)x^{s/2-1}\ \mr{d}x + \int_1^\infty
+\Omega(x)x^{s/2-1}\ \mr{d}x\\
+    &amp;= \underbrace{\int_0^1 (x^{-1/2}\Omega(1/x) +
+\tfrac{1}{2}(x^{-1/2}-1))x^{s/2-1}\ \mr{d}x}_{(\dagger)} + \int_1^\infty
+\Omega(x)x^{s/2-1}\ \mr{d}x\\
+    &amp;= \int_0^1 \Omega(x)x^{(1-s)/2-1}\ \mr{d}x + \frac{1}{s-1} -
+\frac{1}{s} + \int_1^\infty \Omega(x)x^{s/2-1}\ \mr{d}x \tag{$x\to 1/x$
+in $(\dagger)$}
+\end{aligned}\]</span> Now the magic occurs! We see that in the last
+expression, if we replace <span class="math inline">\(s\)</span> with
+<span class="math inline">\(1-s\)</span>, we actually get the same
+expression back! Moreover, note that this expression is valid for any
+<span class="math inline">\(s\in\C\)</span> with <span class="math inline">\(s\neq 0,1\)</span>. We can then think of it as an
+analytic continuation of <span class="math inline">\(\Lambda(s)\)</span>
+to <span class="math inline">\(\C\setminus\{0,1\}\)</span> such that
+<span class="math inline">\(\Lambda(s) = \Lambda(1-s)\)</span>.</p>
+<div class="thm"><span class="env-head">Theorem 2.8.</span>
+<p>On the region <span class="math inline">\(\C\setminus\{0,1\}\)</span>
+<span class="math display">\[\Lambda(s) := \int_0^1
+\Omega(x)x^{(1-s)/2-1}\ \mr{d}x + \frac{1}{s-1} - \frac{1}{s} +
+\int_1^\infty \Omega(x)x^{s/2-1}\ \mr{d}x\]</span> defines an analytic
+function with poles at <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. Moreover it satisfies <span class="math inline">\(\Lambda(s) = \Lambda(1-s)\)</span> for all <span class="math inline">\(s\neq 0,1\)</span>. If <span class="math inline">\(\Re(s) &gt; 1\)</span> we have <span class="math inline">\(\Lambda(s) =
+\pi^{-s/2}\Gamma(s/2)\zeta(s)\)</span>. Therefore we get a functional
+equation of the Riemann zeta function <span class="math display">\[\pi^{-s/2}\Gamma(s/2)\zeta(s) =
+\pi^{-(1-s)/2}\Gamma((1-s)/2)\zeta(1-s)\]</span></p>
+</div>
+<p>This theorem is very powerful. Note that <span class="math inline">\(1-s = s\)</span> if and only if <span class="math inline">\(s = 1/2\)</span>. This means the information of
+<span class="math inline">\(\zeta(s)\)</span> for <span class="math inline">\(\Re(s) &lt; 1/2\)</span> can be studied using the
+information <span class="math inline">\(\Re(s) &gt; 1/2\)</span>. In
+particular we can study <span class="math inline">\(\Re(s) &lt;
+0\)</span> using <span class="math inline">\(\Re(s) &gt; 1\)</span>,
+which we know quite well!</p>
+</body>
+</html>
